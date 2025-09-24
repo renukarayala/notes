@@ -125,6 +125,8 @@ SKIP - Yellow
 
 Logs
 ==================
+
+sudo mkdir -p /var/log/shellscript====== -p if directory is there keep silent otherwise making directory.
 /var/log/shellscript-logs/15-colors.log
 
 Redirections
