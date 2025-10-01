@@ -70,7 +70,7 @@ sublime editor
 notepad++
 Textpad
 
-vscode -> workspace -> staging area -> commit to local repo -> central repo
+vscode (our workspace)-> workspace -> staging area(tempoarary area)means used git add  -> commit to local repo means git ommit -> central repo means push to git hub
 
 20 files -> 10 files completed changes, 10 files middle
 
