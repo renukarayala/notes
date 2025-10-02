@@ -72,7 +72,7 @@ otherwise it is odd
 
 write a script to know a number is prime or not
 
-Exit status
+Exit status$?
 =============
 dnf install mysql -y
 
@@ -129,8 +129,12 @@ Logs
 sudo mkdir -p /var/log/shellscript====== -p if directory is there keep silent otherwise making directory.
 /var/log/shellscript-logs/15-colors.log
 
+
+echo "16.logs.sh" | cut -d "." -f1
+
+
 Redirections
 ===================
-1 -> success
-2 -> failure
-& -> success/failure
+$1 -> success
+$2 -> failure
+$& -> success/failure
