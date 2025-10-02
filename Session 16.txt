@@ -170,6 +170,12 @@ mkdir: cannot create directory ‘/var/log/shell-script’: File exists
 54.82.104.48 | 172.31.18.148 | t3.micro | https://github.com/renukarayala/shell-practice.git
 [ ec2-user@ip-172-31-18-148 ~/shell-practice ]$)
 
+&>>$LOG_FILE meaning Redirect both stdout and stderr
+
+stdout (file descriptor 1): Normal command output
+
+stderr (file descriptor 2): Error messages
+ tee command useful for print on server and also  in logfile also
 
 Redirections
 ===================
