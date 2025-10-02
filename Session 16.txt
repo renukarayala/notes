@@ -129,8 +129,46 @@ Logs
 sudo mkdir -p /var/log/shellscript====== -p if directory is there keep silent otherwise making directory.
 /var/log/shellscript-logs/15-colors.log
 
-
+We wanted logs file see 16.logs like that 
 echo "16.logs.sh" | cut -d "." -f1
+
+
+
+(54.82.104.48 | 172.31.18.148 | t3.micro | https://github.com/renukarayala/shell-practice.git
+[ ec2-user@ip-172-31-18-148 ~/shell-practice ]$ sudo mkdir  /var/log/shell-script
+mkdir: cannot create directory ‘/var/log/shell-script’: File exists
+
+54.82.104.48 | 172.31.18.148 | t3.micro | https://github.com/renukarayala/shell-practice.git
+[ ec2-user@ip-172-31-18-148 ~/shell-practice ]$ echo $?
+1
+
+54.82.104.48 | 172.31.18.148 | t3.micro | https://github.com/renukarayala/shell-practice.git
+[ ec2-user@ip-172-31-18-148 ~/shell-practice ]$ sudo mkdir  -p   /var/log/shell-script
+
+54.82.104.48 | 172.31.18.148 | t3.micro | https://github.com/renukarayala/shell-practice.git
+[ ec2-user@ip-172-31-18-148 ~/shell-practice ]$ echo $?
+0
+
+54.82.104.48 | 172.31.18.148 | t3.micro | https://github.com/renukarayala/shell-practice.git
+[ ec2-user@ip-172-31-18-148 ~/shell-practice ]$ echo "16.logs.sh" | cut -d "." -f1
+16
+
+54.82.104.48 | 172.31.18.148 | t3.micro | https://github.com/renukarayala/shell-practice.git
+[ ec2-user@ip-172-31-18-148 ~/shell-practice ]$ echo "16.logs.sh" | cut -d "." -f1^C                                                                          
+54.82.104.48 | 172.31.18.148 | t3.micro | https://github.com/renukarayala/shell-practice.git
+[ ec2-user@ip-172-31-18-148 ~/shell-practice ]$ echo "16.logs.sh" | cut -d "." -f1
+16
+
+54.82.104.48 | 172.31.18.148 | t3.micro | https://github.com/renukarayala/shell-practice.git
+[ ec2-user@ip-172-31-18-148 ~/shell-practice ]$ echo "16.logs.sh" | cut -d "." -f1,2
+16.logs
+
+54.82.104.48 | 172.31.18.148 | t3.micro | https://github.com/renukarayala/shell-practice.git
+[ ec2-user@ip-172-31-18-148 ~/shell-practice ]$ echo "16-logs.sh" | cut -d "." -f1
+16-logs
+
+54.82.104.48 | 172.31.18.148 | t3.micro | https://github.com/renukarayala/shell-practice.git
+[ ec2-user@ip-172-31-18-148 ~/shell-practice ]$)
 
 
 Redirections
