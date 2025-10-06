@@ -1,0 +1,275 @@
+Variables
+Data types
+Conditions
+Functions
+Exit status
+Redirections
+Logs
+Colors
+Loops
+Colors are for human, logs are for troubleshooting
+
+3 xerox -> no auto xerox
+300 xerox -> auto xerox
+
+loops/iteration
+
+1. no perfomance improvement
+2. efforts
+
+3. less code duplication
+4. easy to maintain
+5. dynamic workloads
+
+for(int i=0;i<1000;i++){
+	print i;
+}
+0-99
+
+print 0
+print 1
+print 2
+print 3
+
+Error Handling
+==============
+1. Can we move on with the error
+
+expected error should be handled
+unexpected error shouldn't be handled
+
+AMI, SG, Key, instance type, storage
+
+authenticate before
+aws create instance key="" sg-id="" instance-type="t3.micro" --storage="20GB"
+
+aws configure -> authenticate with AWS
+aws s3 ls -> no o/p is okay, but error means credentials are wrong
+
+1. create ec2 instance
+2. update private ip in route53 record
+3. if frontend update public ip in frontend.daws.life
+
+aws instance command:
+    aws ec2 run-instances --image-id ami-09c813fb71547fc4f  --instance-type t3.micro  --security-group-ids sg-0450b0201996acf89 --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=Test}]' 
+
+aws cli to create ec2 instance and get instance id:
+  aws ec2 run-instances \
+    --image-id ami-0abcdef1234567890 \
+    --instance-type t2.micro \
+    --key-name MyKeyPair \
+    --security-group-ids sg-0123456789abcdef0 \
+    --subnet-id subnet-0fedcba9876543210 \
+    --query 'Instances[0].InstanceId' \
+    --output text
+	
+  from above command we can get this --query 'Instances[0].InstanceId' \ --output text
+aws ec2 describe-instances --instance-ids i-0682bd1dbd92ce16c --query 'Reservations[0].Instances[0].PublicIpAddress' --output text
+
+aws cli to get public ip based on instance id
+  aws ec2 describe-instances --instance-ids i-0fd36b3c90d81e72a --query 'Reservations[0].Instances[0].PublicIpAddress' --output text
+
+aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t3.micro --security-group-ids sg-07c8acf3fa6b923fa --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=Test}]' --query 'Reservations[0].Instances[0].PrivateIpAddress' --output text
+ami-09c813fb71547fc4f
+sg-07c8acf3fa6b923fa
+
+1. get the instance-id
+2. query the instance-id to get public ip
+
+11 instances
+I want to create instances dynamically
+
+1. created instance and took instance-id
+2. get private ip or public ip
+
+if instance == "frontend" take public ip else take private ip
+
+Existing Folder to Repo
+=======================
+git init -> intialise the folder as git repo
+
+
+aws route53 change-resource-record-sets \
+  --hosted-zone-id Z0948150OFPSYTNVYZOY \
+  --change-batch '
+  {
+    "Comment": "Updating record set"
+    ,"Changes": [{
+      "Action"              : "UPSERT"
+      ,"ResourceRecordSet"  : {
+        "Name"              : "'$RECORD_NAME'"
+        ,"Type"             : "A"
+        ,"TTL"              : 1
+        ,"ResourceRecords"  : [{
+            "Value"         : "'$IP'"
+        }]
+      }
+    }]
+  }
+  '
+  =========================================================
+  
+  
+  aws configure using command:
+  
+  output:
+  [ ec2-user@ip-172-31-18-148 ~/shell-practice ]$ aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t3.micro --security-group-ids sg-0450b0201996acf89 --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=Test}]'
+{
+    "Groups": [],
+    "Instances": [
+        {
+            "AmiLaunchIndex": 0,
+            "ImageId": "ami-09c813fb71547fc4f",
+            "InstanceId": "i-0f272ea225bbd2441",
+            "InstanceType": "t3.micro",
+            "LaunchTime": "2025-10-02T23:37:31+00:00",
+            "Monitoring": {
+                "State": "disabled"
+            },
+            "Placement": {
+                "AvailabilityZone": "us-east-1d",
+                "GroupName": "",
+                "Tenancy": "default"
+            },
+            "PrivateDnsName": "ip-172-31-22-173.ec2.internal",
+            "PrivateIpAddress": "172.31.22.173",
+            "ProductCodes": [],
+            "PublicDnsName": "",
+            "State": {
+                "Code": 0,
+                "Name": "pending"
+            },
+            "StateTransitionReason": "",
+            "SubnetId": "subnet-0eae3398675cc9b7a",
+            "VpcId": "vpc-0d0927fbd484801ec",
+            "Architecture": "x86_64",
+            "BlockDeviceMappings": [],
+            "ClientToken": "fa4733f8-b7d4-4d6d-9fcc-0a145220e52d",
+            "EbsOptimized": false,
+            "EnaSupport": true,
+            "Hypervisor": "xen",
+            "NetworkInterfaces": [
+                {
+                    "Attachment": {
+                        "AttachTime": "2025-10-02T23:37:31+00:00",
+                        "AttachmentId": "eni-attach-04b0854fac1139977",
+                        "DeleteOnTermination": true,
+                        "DeviceIndex": 0,
+                        "Status": "attaching",
+                        "NetworkCardIndex": 0
+                    },
+                    "Description": "",
+                    "Groups": [
+                        {
+                            "GroupName": "allow-all",
+                            "GroupId": "sg-0450b0201996acf89"
+                        }
+                    ],
+                    "Ipv6Addresses": [],
+                    "MacAddress": "0a:ff:c6:08:e3:83",
+                    "NetworkInterfaceId": "eni-000e9c0f9548e386f",
+                    "OwnerId": "183300740029",
+                    "PrivateDnsName": "ip-172-31-22-173.ec2.internal",
+                    "PrivateIpAddress": "172.31.22.173",
+                    "PrivateIpAddresses": [
+                        {
+                            "Primary": true,
+                            "PrivateDnsName": "ip-172-31-22-173.ec2.internal",
+                            "PrivateIpAddress": "172.31.22.173"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Status": "in-use",
+                    "SubnetId": "subnet-0eae3398675cc9b7a",
+                    "VpcId": "vpc-0d0927fbd484801ec",
+                    "InterfaceType": "interface"
+                }
+            ],
+            "RootDeviceName": "/dev/sda1",
+            "RootDeviceType": "ebs",
+            "SecurityGroups": [
+                {
+                    "GroupName": "allow-all",
+                    "GroupId": "sg-0450b0201996acf89"
+                }
+            ],
+            "SourceDestCheck": true,
+            "StateReason": {
+                "Code": "pending",
+                "Message": "pending"
+            },
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "Test"
+                }
+            ],
+            "VirtualizationType": "hvm",
+            "CpuOptions": {
+                "CoreCount": 1,
+                "ThreadsPerCore": 2
+            },
+            "CapacityReservationSpecification": {
+                "CapacityReservationPreference": "open"
+            },
+            "MetadataOptions": {
+                "State": "pending",
+                "HttpTokens": "optional",
+                "HttpPutResponseHopLimit": 1,
+                "HttpEndpoint": "enabled",
+                "HttpProtocolIpv6": "disabled",
+                "InstanceMetadataTags": "disabled"
+            },
+            "EnclaveOptions": {
+                "Enabled": false
+            },
+            "BootMode": "uefi-preferred",
+            "PrivateDnsNameOptions": {
+                "HostnameType": "ip-name",
+                "EnableResourceNameDnsARecord": false,
+                "EnableResourceNameDnsAAAARecord": false
+            },
+            "MaintenanceOptions": {
+                "AutoRecovery": "default"
+            },
+            "CurrentInstanceBootMode": "uefi"
+        }
+    ],
+    "OwnerId": "183300740029",
+    "ReservationId": "r-094a13ca9f2fce714"
+}
+
+
+aws cli to create ec2 instance and get instance id:
+2nd output:
+54.82.104.48 | 172.31.18.148 | t3.micro | https://github.com/renukarayala/shell-practice.git
+[ ec2-user@ip-172-31-18-148 ~/shell-practice ]$ aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t3.micro --security-group-ids sg-0450b0201996acf89 --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=Test}]' --query 'Instances[0].InstanceId'  --output text
+i-0fd36b3c90d81e72a
+
+
+
+3rd  output using instance id get public ip address:
+54.82.104.48 | 172.31.18.148 | t3.micro | https://github.com/renukarayala/shell-practice.git
+[ ec2-user@ip-172-31-18-148 ~/shell-practice ]$ aws ec2 describe-instances --instance-ids i-0fd36b3c90d81e72a --query 'Reservations[0].Instances[0].PublicIpAddress' --output text
+18.208.249.201
+
+4th command for aws cli to update route 53 record:
+
+aws route53 change-resource-record-sets \
+  --hosted-zone-id Z0563008378YB10OZ2UQY \
+  --change-batch '
+  {
+    "Comment": "Testing creating a record set"
+    ,"Changes": [{
+      "Action"              : "CREATE"
+      ,"ResourceRecordSet"  : {
+        "Name"              : "'" $ENV "'.company.com"
+        ,"Type"             : "CNAME"
+        ,"TTL"              : 120
+        ,"ResourceRecords"  : [{
+            "Value"         : "'" $DNS "'"
+        }]
+      }
+    }]
+  }
+  
